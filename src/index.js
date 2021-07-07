@@ -1,6 +1,5 @@
 import { getImages, START_PAGE, PER_PAGE } from '../src/js/apiService.js';
 import photoTpl from '../src/tpl/photo';
-// import debounce from 'lodash.debounce';
 import { error, defaultModules } from '@pnotify/core';
 import '@pnotify/core/dist/BrightTheme.css';
 import * as PNotifyDesktop from '@pnotify/desktop';
@@ -9,8 +8,8 @@ defaultModules.set(PNotifyDesktop, {});
 const formEl = document.querySelector('#search-form');
 const inputEl = formEl.querySelector('input');
 const galleryEl = document.querySelector('.gallery');
+const photoEl = document.querySelector('.photo-card');
 const loadBtnEl = document.querySelector('#load-btn');
-const INPUT_DELAY = 2000;
 let currentPage = START_PAGE;
 let maxPage = null;
 
@@ -68,17 +67,4 @@ function toggleLoadMore() {
   } else {
     loadBtnEl.classList.add('hidden');
   }
-}
-
-function galleryClick(event) {
-  const largeImageURL = event.target.dataset.source;
-
-  if (event.target.tagName !== 'IMG') {
-    return;
-  }
-  const instance = basicLightbox.create(`
-    <img src="${largeImageURL}" width="800" height="600">
-`);
-
-  instance.show();
 }
